@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkTracker — Generador de Links con Tracking de IP</title>
+  <meta name="description" content="Genera links de seguimiento que capturan la IP del visitante al redirigir al destino original.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <!-- Ambient background effects -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </div>
+        <h1>LinkTracker</h1>
+      </div>
+      <p class="subtitle">Genera links de seguimiento con captura de IP</p>
+    </header>
+
+    <!-- Link Creator -->
+    <section class="creator-section">
+      <div class="glass-card creator-card">
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="16"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+          Crear nuevo link
+        </h2>
+        <form id="create-form" autocomplete="off">
+          <div class="input-group">
+            <div class="input-wrapper">
+              <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <input
+                type="text"
+                id="url-input"
+                placeholder="Ingresa el URL destino (ej: https://google.com)"
+                required
+              >
+            </div>
+            <button type="submit" id="create-btn" class="btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/>
+                <path d="M12 5l7 7-7 7"/>
+              </svg>
+              <span>Generar</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Result -->
+        <div id="result" class="result hidden">
+          <div class="result-header">
+            <span class="result-badge">✓ Link generado</span>
+          </div>
+          <div class="result-link-box">
+            <code id="tracking-url"></code>
+            <button id="copy-btn" class="btn-copy" title="Copiar al portapapeles">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span>Copiar</span>
+            </button>
+          </div>
+          <p class="result-original">Destino: <a id="original-url" href="#" target="_blank" rel="noopener"></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="dashboard-section">
+      <div class="glass-card">
+        <div class="dashboard-header">
+          <h2 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+              <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+              <path d="M18 12a2 2 0 0 0 0 4h4v-4z"/>
+            </svg>
+            Links creados
+          </h2>
+          <button id="refresh-btn" class="btn-ghost" title="Actualizar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/>
+              <polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div id="stats" class="stats-row">
+          <div class="stat-card">
+            <span class="stat-value" id="total-links">0</span>
+            <span class="stat-label">Links</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="total-visits">0</span>
+            <span class="stat-label">Visitas totales</span>
+          </div>
+        </div>
+
+        <!-- Links Table -->
+        <div id="links-container" class="links-container">
+          <div class="empty-state" id="empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+            <p>Aún no has creado ningún link</p>
+            <span>Ingresa un URL arriba para comenzar</span>
+          </div>
+          <div id="links-list" class="links-list"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden">
+    <span id="toast-message"></span>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
