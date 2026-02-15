@@ -1,148 +1,288 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkTracker — Generador de Links con Tracking de IP</title>
-  <meta name="description" content="Genera links de seguimiento que capturan la IP del visitante al redirigir al destino original.">
+  <title>NetTools — Herramientas de Networking & Seguridad</title>
+  <meta name="description"
+    content="Toolkit de herramientas de networking y seguridad: IP Tracker, IP Lookup, WHOIS, DNS, Port Scanner, Password Generator, Hash Generator.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
-  <!-- Ambient background effects -->
+  <!-- Ambient background -->
   <div class="ambient-bg">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <div class="container">
-    <!-- Header -->
-    <header class="header">
-      <div class="logo">
+  <div class="app-layout">
+    <!-- ─── Sidebar ─────────────────────────────────────────── -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
         <div class="logo-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5" />
+            <line x1="12" y1="19" x2="20" y2="19" />
           </svg>
         </div>
-        <h1>LinkTracker</h1>
+        <span class="logo-text">NetTools</span>
       </div>
-      <p class="subtitle">Genera links de seguimiento con captura de IP</p>
-    </header>
 
-    <!-- Link Creator -->
-    <section class="creator-section">
-      <div class="glass-card creator-card">
-        <h2 class="section-title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="16"/>
-            <line x1="8" y1="12" x2="16" y2="12"/>
+      <div class="sidebar-nav">
+        <button class="nav-item active" data-tool="ip-tracker">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
           </svg>
-          Crear nuevo link
-        </h2>
-        <form id="create-form" autocomplete="off">
-          <div class="input-group">
-            <div class="input-wrapper">
-              <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
-              <input
-                type="text"
-                id="url-input"
-                placeholder="Ingresa el URL destino (ej: https://google.com)"
-                required
-              >
+          <span>IP Tracker</span>
+        </button>
+        <button class="nav-item" data-tool="ip-lookup">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+          </svg>
+          <span>IP Lookup</span>
+        </button>
+        <button class="nav-item" data-tool="whois">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+          </svg>
+          <span>WHOIS</span>
+        </button>
+        <button class="nav-item" data-tool="dns">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+            <line x1="6" y1="6" x2="6.01" y2="6" />
+            <line x1="6" y1="18" x2="6.01" y2="18" />
+          </svg>
+          <span>DNS Lookup</span>
+        </button>
+        <button class="nav-item" data-tool="port-scanner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+          <span>Port Scanner</span>
+        </button>
+        <button class="nav-item" data-tool="password-gen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          <span>Password Gen</span>
+        </button>
+        <button class="nav-item" data-tool="hash-gen">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="9" x2="20" y2="9" />
+            <line x1="4" y1="15" x2="20" y2="15" />
+            <line x1="10" y1="3" x2="8" y2="21" />
+            <line x1="16" y1="3" x2="14" y2="21" />
+          </svg>
+          <span>Hash Gen</span>
+        </button>
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="version">v2.0</span>
+      </div>
+    </nav>
+
+    <!-- Mobile top bar -->
+    <div class="mobile-topbar" id="mobile-topbar">
+      <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <span class="mobile-title">NetTools</span>
+    </div>
+
+    <!-- ─── Main Content ────────────────────────────────────── -->
+    <main class="main-content" id="main-content">
+
+      <!-- ██ IP TRACKER ██ -->
+      <section class="tool-panel active" id="panel-ip-tracker">
+        <div class="tool-header">
+          <h1>🔗 IP Tracker</h1>
+          <p>Genera links de seguimiento que capturan la IP del visitante</p>
+        </div>
+        <div class="glass-card">
+          <h2 class="card-title">Crear nuevo link</h2>
+          <form id="create-form" autocomplete="off">
+            <div class="input-row">
+              <input type="text" id="url-input" class="tool-input" placeholder="URL destino (ej: https://google.com)"
+                required>
+              <button type="submit" id="create-btn" class="btn-primary"><span>Generar</span></button>
             </div>
-            <button type="submit" id="create-btn" class="btn-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14"/>
-                <path d="M12 5l7 7-7 7"/>
-              </svg>
-              <span>Generar</span>
-            </button>
-          </div>
-        </form>
-
-        <!-- Result -->
-        <div id="result" class="result hidden">
-          <div class="result-header">
-            <span class="result-badge">✓ Link generado</span>
-          </div>
-          <div class="result-link-box">
-            <code id="tracking-url"></code>
-            <button id="copy-btn" class="btn-copy" title="Copiar al portapapeles">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              <span>Copiar</span>
-            </button>
-          </div>
-          <p class="result-original">Destino: <a id="original-url" href="#" target="_blank" rel="noopener"></a></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dashboard -->
-    <section class="dashboard-section">
-      <div class="glass-card">
-        <div class="dashboard-header">
-          <h2 class="section-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
-              <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
-              <path d="M18 12a2 2 0 0 0 0 4h4v-4z"/>
-            </svg>
-            Links creados
-          </h2>
-          <button id="refresh-btn" class="btn-ghost" title="Actualizar">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 4 23 10 17 10"/>
-              <polyline points="1 20 1 14 7 14"/>
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Stats -->
-        <div id="stats" class="stats-row">
-          <div class="stat-card">
-            <span class="stat-value" id="total-links">0</span>
-            <span class="stat-label">Links</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-value" id="total-visits">0</span>
-            <span class="stat-label">Visitas totales</span>
+          </form>
+          <div id="result" class="result-box hidden">
+            <span class="badge badge-success">✓ Link generado</span>
+            <div class="mono-box">
+              <code id="tracking-url"></code>
+              <button id="copy-btn" class="btn-sm">📋 Copiar</button>
+            </div>
+            <p class="text-muted">Destino: <a id="original-url" href="#" target="_blank" rel="noopener"></a></p>
           </div>
         </div>
-
-        <!-- Links Table -->
-        <div id="links-container" class="links-container">
-          <div class="empty-state" id="empty-state">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.3">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-            </svg>
-            <p>Aún no has creado ningún link</p>
-            <span>Ingresa un URL arriba para comenzar</span>
+        <div class="glass-card">
+          <div class="flex-between">
+            <h2 class="card-title">Links creados</h2>
+            <button id="refresh-btn" class="btn-ghost">↻ Refrescar</button>
           </div>
-          <div id="links-list" class="links-list"></div>
+          <div class="stats-row">
+            <div class="stat-card"><span class="stat-value" id="total-links">0</span><span
+                class="stat-label">Links</span></div>
+            <div class="stat-card"><span class="stat-value" id="total-visits">0</span><span
+                class="stat-label">Visitas</span></div>
+          </div>
+          <div id="links-container">
+            <div id="empty-state" class="empty-state">
+              <p>Aún no has creado ningún link</p>
+              <span class="text-muted">Ingresa un URL arriba para comenzar</span>
+            </div>
+            <div id="links-list" class="links-list"></div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- ██ IP LOOKUP ██ -->
+      <section class="tool-panel" id="panel-ip-lookup">
+        <div class="tool-header">
+          <h1>🌍 IP Lookup</h1>
+          <p>Obtén geolocalización e información de cualquier IP</p>
+        </div>
+        <div class="glass-card">
+          <div class="input-row">
+            <input type="text" id="ip-lookup-input" class="tool-input" placeholder="Ingresa una IP (ej: 8.8.8.8)">
+            <button id="ip-lookup-btn" class="btn-primary"><span>Buscar</span></button>
+            <button id="my-ip-btn" class="btn-ghost">Mi IP</button>
+          </div>
+          <div id="ip-lookup-result" class="result-area hidden"></div>
+        </div>
+      </section>
+
+      <!-- ██ WHOIS ██ -->
+      <section class="tool-panel" id="panel-whois">
+        <div class="tool-header">
+          <h1>📋 WHOIS Lookup</h1>
+          <p>Consulta la información de registro de cualquier dominio</p>
+        </div>
+        <div class="glass-card">
+          <div class="input-row">
+            <input type="text" id="whois-input" class="tool-input" placeholder="Ingresa un dominio (ej: google.com)">
+            <button id="whois-btn" class="btn-primary"><span>Consultar</span></button>
+          </div>
+          <div id="whois-result" class="result-area hidden"></div>
+        </div>
+      </section>
+
+      <!-- ██ DNS LOOKUP ██ -->
+      <section class="tool-panel" id="panel-dns">
+        <div class="tool-header">
+          <h1>🔍 DNS Lookup</h1>
+          <p>Resuelve registros DNS de cualquier dominio</p>
+        </div>
+        <div class="glass-card">
+          <div class="input-row">
+            <input type="text" id="dns-input" class="tool-input" placeholder="Ingresa un dominio (ej: google.com)">
+            <button id="dns-btn" class="btn-primary"><span>Resolver</span></button>
+          </div>
+          <div id="dns-result" class="result-area hidden"></div>
+        </div>
+      </section>
+
+      <!-- ██ PORT SCANNER ██ -->
+      <section class="tool-panel" id="panel-port-scanner">
+        <div class="tool-header">
+          <h1>🔌 Port Scanner</h1>
+          <p>Escanea puertos abiertos en un host</p>
+        </div>
+        <div class="glass-card">
+          <div class="input-row">
+            <input type="text" id="port-host-input" class="tool-input" placeholder="Host (ej: google.com)">
+            <input type="number" id="port-start-input" class="tool-input small" placeholder="Desde" value="1">
+            <input type="number" id="port-end-input" class="tool-input small" placeholder="Hasta" value="100">
+            <button id="port-scan-btn" class="btn-primary"><span>Escanear</span></button>
+          </div>
+          <div id="port-scan-result" class="result-area hidden"></div>
+        </div>
+      </section>
+
+      <!-- ██ PASSWORD GENERATOR ██ -->
+      <section class="tool-panel" id="panel-password-gen">
+        <div class="tool-header">
+          <h1>🔑 Password Generator</h1>
+          <p>Genera contraseñas seguras y personalizables</p>
+        </div>
+        <div class="glass-card">
+          <div class="password-options">
+            <div class="option-row">
+              <label>Longitud: <span id="pw-length-val">16</span></label>
+              <input type="range" id="pw-length" min="4" max="128" value="16" class="range-input">
+            </div>
+            <div class="checkbox-grid">
+              <label class="checkbox-label"><input type="checkbox" id="pw-upper" checked> Mayúsculas (A-Z)</label>
+              <label class="checkbox-label"><input type="checkbox" id="pw-lower" checked> Minúsculas (a-z)</label>
+              <label class="checkbox-label"><input type="checkbox" id="pw-numbers" checked> Números (0-9)</label>
+              <label class="checkbox-label"><input type="checkbox" id="pw-symbols" checked> Símbolos (!@#$...)</label>
+            </div>
+          </div>
+          <button id="pw-generate-btn" class="btn-primary full-width"><span>Generar Contraseña</span></button>
+          <div id="pw-result" class="result-box hidden">
+            <div class="mono-box large">
+              <code id="pw-output"></code>
+              <button id="pw-copy-btn" class="btn-sm">📋 Copiar</button>
+            </div>
+            <div class="pw-strength" id="pw-strength"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ██ HASH GENERATOR ██ -->
+      <section class="tool-panel" id="panel-hash-gen">
+        <div class="tool-header">
+          <h1>#️⃣ Hash Generator</h1>
+          <p>Genera hashes criptográficos de cualquier texto</p>
+        </div>
+        <div class="glass-card">
+          <textarea id="hash-input" class="tool-textarea" rows="3"
+            placeholder="Ingresa el texto a hashear..."></textarea>
+          <button id="hash-btn" class="btn-primary full-width"><span>Generar Hashes</span></button>
+          <div id="hash-result" class="result-area hidden"></div>
+        </div>
+      </section>
+
+    </main>
   </div>
 
-  <!-- Toast notification -->
-  <div id="toast" class="toast hidden">
-    <span id="toast-message"></span>
-  </div>
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"><span id="toast-message"></span></div>
 
   <script src="/app.js"></script>
 </body>
+
 </html>
